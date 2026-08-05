@@ -14,5 +14,7 @@ class BaseController:
             self.base_dir, # إلي هو ال Source ,Base Directory بتاعي علشان من خلاله أوصل لل file_dir
             "assets/files" # إلي موجود فيه الملفات
         )
-def generate_random_string(self,length:int=12):
-    return ' '.join(random.choices(string.ascii_lowercase + string.digits,k = length) )
+    def generate_random_string(self,length:int=12): # return 12_random_character
+        return ''.join(random.choices(string.ascii_lowercase + string.digits,k = length) )
+
+

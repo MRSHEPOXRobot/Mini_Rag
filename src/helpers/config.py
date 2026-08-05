@@ -1,5 +1,7 @@
 from pydantic_settings import BaseSettings,SettingsConfigDict
-
+# فائدة ال Pydantic هي 1: تحميل القيم من ال .env
+# التحقق من أنواع البيانات Validation
+# تحويل البيانات للنوع المناسب Parsing 
 class Settings(BaseSettings): # class settings inherts from class BaseSettings
     APP_NAME : str
     APP_VERSION : str

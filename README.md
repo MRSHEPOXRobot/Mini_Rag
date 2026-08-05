@@ -13,7 +13,7 @@ sudo apt update
 sudo apt install libpq-dev gcc python3-dev
 ```
 
-#### Install Python using MiniConda
+#### Install Python using MiniConda 
 
 1) Download and install MiniConda from [here](https://docs.anaconda.com/free/miniconda/#quick-command-line-install)
 2) Create a new environment using the following command:
@@ -25,7 +25,7 @@ $ conda create -n mini-rag python=3.10
 $ conda activate mini-rag
 ```
 
-### (Optional) Setup you command line interface for better readability
+### (Optional) Setup your command line interface for better readability
 
 ```bash
 export PS1="\[\033[01;32m\]\u@\h:\w\n\[\033[00m\]\$ "
