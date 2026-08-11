@@ -1,0 +1,20 @@
+# 8.3-noble docker pull mongo:8.3-noble
+services:
+  mongodb:
+    image: mongo:8.3-noble
+
+    container_name: mongodb
+
+    ports:
+      - "27007:27017"
+
+    volumes:
+      - ./mongodb:/data/db
+
+    networks:
+      - backend
+
+    restart: always
+
+networks:
+  backend:
