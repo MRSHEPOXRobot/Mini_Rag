@@ -8,5 +8,7 @@ class ResponseSignal(Enum): #inherits from Enum
     FILE_UPLOAD_FAILED = "file_upload_failed"
     PROCESSING_SUCCESS = "processing_success"
     PROCESSING_FAILED = "processing_failed"
+    NO_FILES_ERROR = "not_found_files"
+    FILE_ID_ERROR = "no_file_found_with_this_id"
 
 
