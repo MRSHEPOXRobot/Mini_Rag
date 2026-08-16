@@ -7,7 +7,6 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from helpers.config import get_settings
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
 
