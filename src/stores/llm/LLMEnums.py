@@ -19,6 +19,7 @@ class CoHereEnums(Enum):
     QUERY = "search_query"
 
 
-class DocumentTypeEnum(Enum):
+# ممكن Providers تانية يفرق معاها ال DocumentType
+class DocumentTypeEnum(Enum): # علشان كده علمناها في class لوحدها
     DOCUMENT = "document"
     QUERY = "query"

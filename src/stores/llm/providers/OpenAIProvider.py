@@ -24,8 +24,7 @@ class OpenAIProvider(LLMInterface):# هنا هو بيتبع الlogic بتاع �
             self.embedding_size = None
 
             self.client = OpenAI(
-                api_key=self.api_key,
-                api_url=self.api_url
+                api_key=self.api_key
             )
 
             self.logger = logging.getLogger(__name__)
@@ -98,5 +97,4 @@ class OpenAIProvider(LLMInterface):# هنا هو بيتبع الlogic بتاع �
             "role": role,
             "content": self.process_text(prompt)
         }
-
 

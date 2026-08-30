@@ -13,7 +13,7 @@ class ProjectModel(BaseDataModel):
     # عملنا فانكشن بتعرف ال object وبتنادي فيه على ال init_connection إلي من نوع async
     # علشان أنا مكنتش هعرف أنادي على ال async init_connection داخل ال __init__ لإنها من نوع async
     @classmethod #define static method
-    async def create_instance(cls, db_client: object):#static method
+    async def create_instance(cls, db_client: object):#class method
         instance = cls(db_client) # كده أنا بقوله يا كلاس خد ال db_client وهو كده نادى على ال init()
         await instance.init_collection()
         return instance

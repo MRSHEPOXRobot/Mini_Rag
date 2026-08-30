@@ -53,6 +53,14 @@ $ cp .env.example .env
 
 ```bash
 $ cd docker
+$ docker ps -a
+# Stop and remove all containers, images, and volumes
+$ docker stop $(docker ps -a -q)
+$ docker rm $(docker ps -a -q)
+$ docker rmi $(docker images -q)
+$ docker volume rm $(docker volume ls -q)
+$ docker system prune -all
+# Build and start the services in detached mode
 $ sudo docker compose up -d
 ```
 

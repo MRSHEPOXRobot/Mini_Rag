@@ -9,3 +9,5 @@ pymupdf == 1.28.0
 motor == 3.7.1
 pydantic-mongo == 3.1.0
 openai == 3.1.0
+cohere == 7.0.8
+qdrant-client == 1.19.0
