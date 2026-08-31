@@ -1,4 +1,4 @@
-from fastapi import FastAPI,APIRouter,Depends,UploadFile,status,Request
+from fastapi import FastAPI,APIRouter,Depends,UploadFile,status,Request,File
 from fastapi.responses import JSONResponse
 import os
 from helpers.config import get_settings,Settings
@@ -21,7 +21,7 @@ data_router = APIRouter(
 ) # define object
 
 @data_router.post("/upload/{project_id}") # endpoint called upload to upload the file and the project_id is a path parameter
-async def upload_data(request: Request,project_id : str, file : UploadFile, #Function of endpoint its type is string,because we don't make any math operations.
+async def upload_data(request: Request,project_id : str, file : UploadFile = File(...), #Function of endpoint its type is string,because we don't make any math operations.
                       #parameter file is a type of UploadFile.
                       app_settings : Settings = Depends(get_settings ) ): # app_setting is a variable of type settings and depends on get_settings
 
@@ -89,7 +89,8 @@ async def upload_data(request: Request,project_id : str, file : UploadFile, #Fun
     return JSONResponse(
         content={
             "signal" : ResponseSignal.FILE_UPLOAD_SUCCESS.value,
-            "file_id" : file_id # ده ال ID بتاع الملف إلي اتحفظ في ال Database
+            "file_id" : file_id, # ده ال ID بتاع الملف إلي اتحفظ في ال Database
+
         }
     )
 
@@ -230,4 +231,3 @@ async def process_endpoint(request: Request,project_id:str,process_request:Proce
             "processed_files": no_files
         }
     )
-

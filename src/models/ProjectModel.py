@@ -40,7 +40,7 @@ class ProjectModel(BaseDataModel):
         result = await self.collection.insert_one(project.model_dump(by_alias=True, exclude_unset=True))
         # الفانكشن insert_one بتاخد dictionary
         # by_alias=True هات الإسم المستعار , exclude_unset=True خد القيم الأفتراضية
-        project.id = result.inserted_id
+        project.id = result.inserted_id # بعد ما خزّنت الـ Document في MongoDB، استقبل الـ ObjectId الخاص بالـ Document الجديد في project.id
 
         return project
 
@@ -55,7 +55,7 @@ class ProjectModel(BaseDataModel):
         # "project_id": "2"
         # وده ممكن يكون String عادي.
 
-        if record is None:
+        if record is None: # project not found, create new one
             # create new project
             project = Project(project_id=project_id)
             project = await self.create_project(project=project)
@@ -64,18 +64,32 @@ class ProjectModel(BaseDataModel):
 
         return Project(**record) #هيتحول من dict ل Project Model
 
+
     async def get_all_projects(self, page: int = 1, page_size: int = 10): #Default Values.
 
         # count total number of documents
-        total_documents = await self.collection.count_documents({})
+        total_documents = await self.collection.count_documents({}) # count_documents(filter) count based on filter, {} means count all documents
+        # await because we're counting documents in MongoDB is an asynchronous operation, and we need to wait for the result before proceeding.
 
         # calculate total number of pages
         total_pages = total_documents // page_size
         if total_documents % page_size > 0:
             total_pages += 1
 
-        cursor = self.collection.find().skip( (page - 1) * page_size ).limit(page_size)
+        # Pagination Example:
+        # total_documents = 57
+        # page_size = 10
+        # total_pages = 57 // 10 = 5
+        # 57 % 10 = 7 > 0, so total_pages += 1 => total_pages = 6
+
+
+        cursor = self.collection.find().skip( (page - 1) * page_size ).limit(page_size) #find projects related to the page which the user requested,skip the previous pages and limit the number of projects to the page size.
         # "جهّزلي Cursor أقدر ألف بيه على الـ documents" وليس: "هاتلي الـ documents دلوقتي لذلك مفيش await هنا.
+
+        #pagination example:
+        # user requested page 2, page size 10, so skip (2-1)*10 = 10 documents
+        # and limit to 10 documents, so we get documents 11-20.
+
         projects = []
         async for document in cursor: # async
             #لإن cursor جاي من motor و motor ده async

@@ -6,7 +6,7 @@ class DataChunk(BaseModel):
     #Every Record in chunks should have these fields.
     id: Optional[ObjectId] = Field(None,alias="_id")
 
-    chunk_text: str = Field(...,min_length=1)
+    chunk_text: str = Field(...,min_length=1) #content of the chunk, should not be empty.
     chunk_metadata: dict
 
     chunk_order: int = Field(...,gt=0) #Should be greater than 0.

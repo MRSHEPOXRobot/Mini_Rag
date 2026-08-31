@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 #Design Custom validation on schema
 class Project(BaseModel):
 
-    id: Optional[ObjectId] = Field(None,alias="_id")
+    id: Optional[ObjectId] = Field(None,alias="_id") #every schema should have an id field, alias="_id" means it will be stored as "_id" in MongoDB.
 
     project_id: str = Field(..., min_length=1) # ... means required field, min_length=1 means it should not be empty.
 
@@ -19,6 +19,7 @@ class Project(BaseModel):
 
         return value
 
+    #to ignore arbitrary types (like ObjectId) in Pydantic model.
     model_config = ConfigDict(
         arbitrary_types_allowed=True #allow arbitrary types (like ObjectId)
     )

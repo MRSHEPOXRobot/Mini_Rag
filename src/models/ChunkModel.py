@@ -32,13 +32,13 @@ class ChunkModel(BaseDataModel):
 
         result = await self.collection.insert_one(chunk.model_dump(by_alias=True, exclude_unset=True))
         chunk.id = result.inserted_id
-        return chunk
+        return chunk #return chunk with the new id.
 
     async def get_chunk(self, chunk_id: str):
         result = await self.collection.find_one({
             "_id": ObjectId(chunk_id) #chunk_id to object_id
         })
-        # # MongoDB _id
+         # MongoDB _id
          # ده MongoDB نفسه بيديره: "_id": ObjectId("68a123...")
         # وده طبيعي تستخدم معاه: ObjectId(chunk_id)
 
@@ -54,9 +54,8 @@ class ChunkModel(BaseDataModel):
             batch = chunks[i: i + batch_size] #start from i to i + batch_size
             # num of batches= len(chunks)/batch_size
 
-
             operations = [
-                InsertOne(chunk.model_dump(by_alias=True, exclude_unset=True))
+                InsertOne(chunk.model_dump(by_alias=True, exclude_unset=True)) #InsertOne is a pymongo operation that inserts a single document into a collection.
                 for chunk in batch
             ]
 
@@ -92,6 +91,4 @@ class ChunkModel(BaseDataModel):
         ]
 
     #async def count_project_chunks(self, project_id: ObjectId):
-
-
 
